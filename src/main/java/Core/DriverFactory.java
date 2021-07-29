@@ -9,39 +9,36 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DriverFactory {
 
-	private static WebDriver driver;
+    private static WebDriver driver;
 
-	public static WebDriver getDriver() {
+    public static WebDriver getDriver() {
 
-		if (driver == null) {
-			switch (BrowserSettings.browser) {
-			case CHROME:
+        if (driver == null) {
+            switch (BrowserSettings.browser) {
+                case CHROME:
 //				System.setProperty("webdriver.chrome.driver", "C:\\webdrivers\\chromedriver.exe");
-				WebDriverManager.chromedriver().setup();
-				driver = new ChromeDriver();
-				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-				break;
+                    WebDriverManager.chromedriver().setup();
+                    driver = new ChromeDriver();
+                    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+                    driver.manage().window().maximize();
+                    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+                    break;
 
-			case HEADLESS:
-				ChromeOptions options = new ChromeOptions();
-				System.setProperty("webdriver.chrome.driver", "C:\\webdrivers\\chromedriver.exe");
-				options.addArguments("--headless");
-				driver = new ChromeDriver(options);
+                case HEADLESS:
+                    ChromeOptions options = new ChromeOptions();
+                    System.setProperty("webdriver.chrome.driver", "C:\\webdrivers\\chromedriver.exe");
+                    options.addArguments("--headless");
+                    driver = new ChromeDriver(options);
+            }
+        }
+        return driver;
+    }
 
-			}
-		}
-
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
-		return driver;
-	}
-
-	public static void killDriver() {
-		if (driver != null) {
-			driver.quit();
-			driver = null;
-		}
-	}
+    public static void killDriver() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
+    }
 
 }
