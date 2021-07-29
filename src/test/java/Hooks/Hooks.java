@@ -37,7 +37,7 @@ public class Hooks {
 				scenario.attach(screenshot, "image/png", screenshotName);
 			}
 		}catch (Exception e) {
-			e.printStackTrace();
+			throw new RuntimeException("ERRO AO PRINTAR");
 		}
 		killDriver();
 	}

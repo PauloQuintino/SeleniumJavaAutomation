@@ -67,8 +67,7 @@ public class ExcelApiTest {
 				return String.valueOf(cell.getBooleanCellValue());
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			return "Não encontrado";
+			return "NÃ£o encontrado";
 		}
 
 	}
@@ -103,7 +102,6 @@ public class ExcelApiTest {
 			else
 				return String.valueOf(cell.getBooleanCellValue());
 		} catch (Exception e) {
-			e.printStackTrace();
 			return "row " + rowNum + " or column " + col_Num + " does not exist  in Excel";
 		}
 	}
@@ -127,7 +125,6 @@ public class ExcelApiTest {
 			return "VALUE: " + valor;
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			return "NOT FOUND";
 		}
 	}
@@ -238,7 +235,7 @@ public class ExcelApiTest {
 			}
 
 		} catch (IOException e) {
-			e.printStackTrace();
+
 		}
 		return "NOT FOUND";
 	}
