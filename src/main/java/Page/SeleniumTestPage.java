@@ -63,8 +63,9 @@ public class SeleniumTestPage {
         return this;
     }
 
-    public SeleniumTestPage search(String text) {
-        searchBar.sendKeys(text);
+    public SeleniumTestPage search(String text) throws Exception {
+        ExcelApiTest data = new ExcelApiTest();
+        searchBar.sendKeys(data.getDt("tag1", "SearchWord"));
         validateSearchOptions();
         searchButton.click();
         return this;
@@ -83,14 +84,14 @@ public class SeleniumTestPage {
         }
     }
 
-    public boolean validateSearchResults() {
+    public boolean validateSearchResults() throws Exception {
         System.out.println("\n**** VALIDATING THE SEARCH RESULTS ****\n");
-
+        ExcelApiTest data = new ExcelApiTest();
         boolean result = false;
 
         for (int i = 0; i < searchResults.size(); i++) {
             System.out.println(searchResults.get(i).getText());
-            if (searchResults.get(i).getText().contains("Selenium")) {
+            if (searchResults.get(i).getText().contains(data.getDt("tag1", "SearchWord"))) {
                 result = true;
             }
         }

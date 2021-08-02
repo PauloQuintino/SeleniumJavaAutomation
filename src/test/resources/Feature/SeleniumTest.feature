@@ -3,10 +3,13 @@
 Feature: Test Automation Java Selenium
 
   @tag1
-  Scenario: Setting up web driver
+  Scenario Outline: Setting up web driver
     Given I visit Google page
-    When search for "Selenium Tutorial"
+    When search for "<search>"
     Then I validate de result
+    Examples:
+    |search|
+    |xxxx  |
 
   @login-csv
   Scenario: Login

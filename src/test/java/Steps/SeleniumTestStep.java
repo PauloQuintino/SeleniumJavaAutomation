@@ -34,29 +34,23 @@ public class SeleniumTestStep {
     }
 
     @When("search for {string}")
-    public void search_for(String videoName) throws IOException {
-
+    public void search_for(String videoName) throws Exception {
         seleniumTestPage = new SeleniumTestPage(getDriver());
         seleniumTestPage.search(videoName);
 
     }
 
     @Then("I validate de result")
-    public void i_validate_de_result() throws IOException {
+    public void i_validate_de_result() throws Exception {
         seleniumTestPage = new SeleniumTestPage(getDriver());
         assertTrue(seleniumTestPage.validateSearchResults());
     }
-
-    private String takeScreenshot(WebDriver driver) {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
-    }
-
 
     //login-csv
     @Given("que esteja na pagina de login")
     public void que_esteja_na_pagina_de_login() {
         seleniumTestPage = new SeleniumTestPage(getDriver());
-//		seleniumTestPage.acessAutomationPraticePage();
+		seleniumTestPage.acessAutomationPraticePage();
         seleniumTestPage.acessLoginPage();
         ;
     }
