@@ -13,14 +13,12 @@ import org.openqa.selenium.support.PageFactory;
 
 import datafiles.ExcelApiTest;
 import io.cucumber.datatable.DataTable;
+import static Core.DriverFactory.getDriver;
 
 public class SeleniumTestPage {
 
-    WebDriver driver;
-
-    public SeleniumTestPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+    public SeleniumTestPage() {
+        PageFactory.initElements(getDriver(), this);
     }
 
     // Page mapping
@@ -59,7 +57,7 @@ public class SeleniumTestPage {
     // Methods
 
     public SeleniumTestPage googlePage() {
-        driver.get("https://google.com");
+        getDriver().get("https://google.com");
         return this;
     }
 
@@ -72,7 +70,7 @@ public class SeleniumTestPage {
     }
 
     public SeleniumTestPage validateTitle() {
-        assertEquals(driver.getTitle(), "Google");
+        assertEquals(getDriver().getTitle(), "Google");
         return this;
     }
 
@@ -101,7 +99,7 @@ public class SeleniumTestPage {
 
 
     public void acessAutomationPraticePage() {
-        driver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
+        getDriver().get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
     }
 
 
