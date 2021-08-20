@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.cucumber.java.en.And;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -22,44 +23,54 @@ import io.cucumber.java.en.When;
 public class SeleniumTestStep {
 
 
-    private SeleniumTestPage seleniumTestPage = new SeleniumTestPage();;
+    private SeleniumTestPage seleniumTestPage = new SeleniumTestPage();
+    ;
 
-    @Given("I visit Google page")
-    public void iVisitGooglePage() throws IOException {
-        System.out.println("COMEÇOU");
-        seleniumTestPage.googlePage();
-        seleniumTestPage.validateTitle();
 
-    }
-
-    @When("search for {string}")
-    public void search_for(String videoName) throws Exception {
-        seleniumTestPage.search(videoName);
-
-    }
-
-    @Then("I validate de result")
-    public void i_validate_de_result() throws Exception {
-        assertTrue(seleniumTestPage.validateSearchResults());
-    }
-
-    //login-csv
-    @Given("que esteja na pagina de login")
-    public void que_esteja_na_pagina_de_login() {
-		seleniumTestPage.acessAutomationPraticePage();
+    // >>>>>>>>>>>>>>> login-csv <<<<<<<<<<<<<<<<
+    @Given("that I am logged")
+    public void thatIAmLogged() {
         seleniumTestPage.acessLoginPage();
-        ;
+        seleniumTestPage.login();
+        seleniumTestPage.validateSucessfullyLogin();
     }
 
-    @When("inserir usuario e senha corretamente:")
-    public void inserir_usuario_e_senha_corretamente(DataTable dataTable) throws Exception {
-        seleniumTestPage.loginWithCSV(dataTable);
+    @When("input user and password correctly")
+    public void inputUserAndPasswordCorrectly() throws Exception {
+        seleniumTestPage.login();
     }
 
-    @Then("o login eh validado com sucesso")
-    public void o_login_eh_validado_com_sucesso() throws InterruptedException {
-            Thread.sleep(2000);
-            seleniumTestPage.validateSucessfullyLogin();
+    @Then("the login is successful")
+    public void theLoginIsSuccessful() throws InterruptedException {
+        seleniumTestPage.validateSucessfullyLogin();
     }
+
+    // >>>>>>>>>>>>>>> buy-clothes-csv <<<<<<<<<<<<<<<<
+
+    @Given("choose the product to buy")
+    public void chooseTheProductToBuy() throws InterruptedException {
+        seleniumTestPage.addProductInCartAtHomePage();
+    }
+
+    @And("validate the product on the checkout page")
+    public void validateTheProductInCheckoutPage() {
+
+    }
+
+    @And("validate the adress")
+    public void validateTheAdress() {
+
+    }
+
+    @When("choose the payment method")
+    public void chooseThePaymentMethod() {
+
+    }
+
+    @Then("the purchase have to be successfully done")
+    public void thePurchaseHaveToBeSuccessfullyDone() {
+
+    }
+
 
 }

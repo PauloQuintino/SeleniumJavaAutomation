@@ -1,5 +1,3 @@
-CT;User;Password;SearchWord
-CT1;paulo;123456;
-CT2;juca;999999;
-login-csv;automatomati@gmail.com;12345;
-tag1;;;Selenium Tutorial
+CT;User;Password;product;quantity;color;size;address;payment_method
+login-csv;automatomati@gmail.com;12345;;;;;;
+buy-clothes-csv;;;Faded Short Sleeve T-shirts;2;Blue;M;rua 1234t5 SUITE 421682;bank
