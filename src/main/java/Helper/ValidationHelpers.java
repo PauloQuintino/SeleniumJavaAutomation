@@ -2,12 +2,13 @@ package Helper;
 
 public class ValidationHelpers {
 
-    private String productName;
-    private String size;
-    private String color;
-    private float unitPrice;
-    private float shippingTax;
-    private int quantity;
+    private static String productName;
+    private static String size;
+    private static String color;
+    private static String unitPrice;
+    private static String shippingTax;
+    private static int quantity;
+    private static String orderId;
 
 
     public String getProductName() {
@@ -34,19 +35,19 @@ public class ValidationHelpers {
         this.color = color;
     }
 
-    public float getUnitPrice() {
+    public String getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(float unitPrice) {
+    public void setUnitPrice(String unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public float getShippingTax() {
+    public String getShippingTax() {
         return shippingTax;
     }
 
-    public void setShippingTax(float shippingTax) {
+    public void setShippingTax(String shippingTax) {
         this.shippingTax = shippingTax;
     }
 
@@ -58,10 +59,23 @@ public class ValidationHelpers {
         this.quantity = quantity;
     }
 
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        ValidationHelpers.orderId = orderId;
+    }
+
+
     // ========== METHODS =========== //
 
-    public float getTotalPrice(){
-        return (quantity * unitPrice) + shippingTax;
+    public float getProductsTotalPrice() {
+        return quantity * Float.parseFloat(unitPrice);
+    }
+
+    public float getPurchaseTotal() {
+        return getProductsTotalPrice() + Float.parseFloat(shippingTax);
     }
 
 }

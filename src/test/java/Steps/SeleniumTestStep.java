@@ -2,6 +2,7 @@ package Steps;
 
 import static org.junit.Assert.assertTrue;
 
+import Page.CheckoutPage;
 import Page.RegisterPage;
 import io.cucumber.java.en.And;
 
@@ -17,6 +18,7 @@ public class SeleniumTestStep {
 
     private HomePage homePage = new HomePage();
     private RegisterPage registerPage = new RegisterPage();
+    private CheckoutPage checkoutPage = new CheckoutPage();
 
 
     // >>>>>>>>>>>>>>> login-csv <<<<<<<<<<<<<<<<
@@ -47,22 +49,29 @@ public class SeleniumTestStep {
 
     @And("validate the product on the checkout page")
     public void validateTheProductInCheckoutPage() {
-
+        checkoutPage.validateChechoutPage();
+        checkoutPage.validateProductInShoppingCart();
     }
 
     @And("validate the adress")
     public void validateTheAdress() {
-
+        checkoutPage.validateDeliveryAddressCheckout();
+        checkoutPage.acceptShippingTerms();
     }
 
     @When("choose the payment method")
-    public void chooseThePaymentMethod() {
-
+    public void chooseThePaymentMethod() throws InterruptedException {
+        checkoutPage.paymentMethod();
     }
 
     @Then("the purchase have to be successfully done")
-    public void thePurchaseHaveToBeSuccessfullyDone() {
+    public void thePurchaseHaveToBeSuccessfullyDone() throws InterruptedException {
+        checkoutPage.confirmOrder();
+    }
 
+    @And("the Order ID should appears at Order History")
+    public void theOrderIdShouldAppearsAtOrderHistory() throws InterruptedException {
+        checkoutPage.validateOrderHistory();
     }
 
 

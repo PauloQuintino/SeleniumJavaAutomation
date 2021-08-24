@@ -1,5 +1,6 @@
 package Page;
 
+import Helper.ValidationHelpers;
 import datafiles.ExcelApiTest;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -26,14 +27,35 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//a[@title='Proceed to checkout']")
     private WebElement btnProceedToCheckout;
 
+    @FindBy(id = "layer_cart_product_title")
+    private WebElement spanProductName;
+
+    @FindBy(id = "layer_cart_product_attributes")
+    private WebElement spanProductColorSize;
+
+    @FindBy(id = "layer_cart_product_quantity")
+    private WebElement spanProductQuantity;
+
+    @FindBy(id = "layer_cart_product_price")
+    private WebElement spanProductUnitPrice;
+
+    @FindBy(className = "ajax_block_products_total")
+    private WebElement spanTotalProductsPrice;
+
+    @FindBy(xpath = "//span[@class='ajax_cart_shipping_cost']")
+    private WebElement spanTotalShippingPrice;
+
+    @FindBy(xpath = "//span[@class='ajax_block_cart_total']")
+    private WebElement spanTotalValue;
 
     // ================== CLASSES =================== //
 
     ExcelApiTest data = new ExcelApiTest();
+    ValidationHelpers helpers = new ValidationHelpers();
 
     // ================== METHODS =================== //
 
-    public void accessHomePage(){
+    public void accessHomePage() {
         homeLogo.click();
     }
 
@@ -46,6 +68,14 @@ public class HomePage extends BasePage {
         productClick.click();
         Thread.sleep(4000);
         Assert.assertEquals("Product successfully added to your shopping cart", successMessageAddToCart.getText().trim());
+
+        String[] attributes = spanProductColorSize.getText().split(",");
+        helpers.setProductName(spanProductName.getText().trim());
+        helpers.setColor(attributes[0].trim());
+        helpers.setSize(attributes[1].trim());
+        helpers.setQuantity(Integer.parseInt(spanProductQuantity.getText().trim()));
+        helpers.setUnitPrice(spanProductUnitPrice.getText().replace("$", "").trim());
+        helpers.setShippingTax(spanTotalShippingPrice.getText().replace("$", "").trim());
         btnProceedToCheckout.click();
     }
 

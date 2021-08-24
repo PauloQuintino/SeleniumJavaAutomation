@@ -11,4 +11,5 @@ Feature: Test Automation Java Selenium
     And validate the adress
     When choose the payment method
     Then the purchase have to be successfully done
+    And the Order ID should appears at Order History
 
