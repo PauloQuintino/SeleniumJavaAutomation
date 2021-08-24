@@ -2,7 +2,7 @@
 Feature: Test Automation Java Selenium
 
   @login
-  Scenario: Login with different accoutn
+  Scenario: Login with different account
     Given I am in login page
     When input user and password correctly
     Then the login is successful

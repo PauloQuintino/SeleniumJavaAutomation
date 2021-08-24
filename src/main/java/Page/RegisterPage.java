@@ -1,5 +1,6 @@
 package Page;
 
+import Utils.WebUtils;
 import datafiles.TestDataReader;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
@@ -38,28 +39,37 @@ public class RegisterPage extends BasePage {
     // ================== CLASSES =================== //
 
     TestDataReader data = new TestDataReader();
+    WebUtils utils = new WebUtils();
 
     public void acessAutomationPraticePage() {
         getDriver().get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
     }
 
     public void acessLoginPage() {
+        utils.highlightElement(btnSignIn);
         btnSignIn.click();
     }
 
     public void login() {
+        utils.highlightElement(inputEmail);
         inputEmail.sendKeys(data.getDt("login-csv", "User"));
+        utils.highlightElement(inputSenha);
         inputSenha.sendKeys(data.getDt("login-csv", "Password").toString());
+        utils.highlightElement(btnLogIn);
         btnLogIn.click();
     }
 
     public void new_login() {
+        utils.highlightElement(inputEmail);
         inputEmail.sendKeys(data.getDt("User"));
+        utils.highlightElement(inputSenha);
         inputSenha.sendKeys(data.getDt("Password"));
+        utils.highlightElement(btnLogIn);
         btnLogIn.click();
     }
 
     public void validateSucessfullyLogin() {
+        utils.highlightElement(titleMyAccount);
         Assert.assertEquals("MY ACCOUNT", titleMyAccount.getText());
         Assert.assertEquals("Welcome to your account. Here you can manage all of your personal information and orders.", textLoginWelcome.getText());
     }
