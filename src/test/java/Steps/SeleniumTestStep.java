@@ -1,19 +1,13 @@
 package Steps;
 
-import static Core.DriverFactory.getDriver;
 import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import Page.CheckoutPage;
+import Page.RegisterPage;
+import io.cucumber.java.en.And;
 
 
-import Page.SeleniumTestPage;
-import io.cucumber.datatable.DataTable;
+import Page.HomePage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -22,44 +16,63 @@ import io.cucumber.java.en.When;
 public class SeleniumTestStep {
 
 
-    private SeleniumTestPage seleniumTestPage = new SeleniumTestPage();;
+    private HomePage homePage = new HomePage();
+    private RegisterPage registerPage = new RegisterPage();
+    private CheckoutPage checkoutPage = new CheckoutPage();
 
-    @Given("I visit Google page")
-    public void iVisitGooglePage() throws IOException {
-        System.out.println("COMEÇOU");
-        seleniumTestPage.googlePage();
-        seleniumTestPage.validateTitle();
 
+    // >>>>>>>>>>>>>>> login-csv <<<<<<<<<<<<<<<<
+    @Given("that I am logged")
+    public void thatIAmLogged() {
+        registerPage.acessLoginPage();
+        registerPage.login();
+        registerPage.validateSucessfullyLogin();
     }
 
-    @When("search for {string}")
-    public void search_for(String videoName) throws Exception {
-        seleniumTestPage.search(videoName);
-
+    @When("input user and password correctly")
+    public void inputUserAndPasswordCorrectly() throws Exception {
+        registerPage.login();
     }
 
-    @Then("I validate de result")
-    public void i_validate_de_result() throws Exception {
-        assertTrue(seleniumTestPage.validateSearchResults());
+    @Then("the login is successful")
+    public void theLoginIsSuccessful() throws InterruptedException {
+        registerPage.validateSucessfullyLogin();
     }
 
-    //login-csv
-    @Given("que esteja na pagina de login")
-    public void que_esteja_na_pagina_de_login() {
-		seleniumTestPage.acessAutomationPraticePage();
-        seleniumTestPage.acessLoginPage();
-        ;
+    // >>>>>>>>>>>>>>> buy-clothes-csv <<<<<<<<<<<<<<<<
+
+    @Given("choose the product to buy")
+    public void chooseTheProductToBuy() throws InterruptedException {
+        homePage.accessHomePage();
+        homePage.addProductInCartAtHomePage();
     }
 
-    @When("inserir usuario e senha corretamente:")
-    public void inserir_usuario_e_senha_corretamente(DataTable dataTable) throws Exception {
-        seleniumTestPage.loginWithCSV(dataTable);
+    @And("validate the product on the checkout page")
+    public void validateTheProductInCheckoutPage() {
+        checkoutPage.validateChechoutPage();
+        checkoutPage.validateProductInShoppingCart();
     }
 
-    @Then("o login eh validado com sucesso")
-    public void o_login_eh_validado_com_sucesso() throws InterruptedException {
-            Thread.sleep(2000);
-            seleniumTestPage.validateSucessfullyLogin();
+    @And("validate the adress")
+    public void validateTheAdress() {
+        checkoutPage.validateDeliveryAddressCheckout();
+        checkoutPage.acceptShippingTerms();
     }
+
+    @When("choose the payment method")
+    public void chooseThePaymentMethod() throws InterruptedException {
+        checkoutPage.paymentMethod();
+    }
+
+    @Then("the purchase have to be successfully done")
+    public void thePurchaseHaveToBeSuccessfullyDone() throws InterruptedException {
+        checkoutPage.confirmOrder();
+    }
+
+    @And("the Order ID should appears at Order History")
+    public void theOrderIdShouldAppearsAtOrderHistory() throws InterruptedException {
+        checkoutPage.validateOrderHistory();
+    }
+
 
 }

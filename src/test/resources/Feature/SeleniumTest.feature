@@ -1,19 +1,15 @@
-
 @web
 Feature: Test Automation Java Selenium
 
-  @tag1
-  Scenario Outline: Setting up web driver
-    Given I visit Google page
-    When search for "<search>"
-    Then I validate de result
-    Examples:
-    |search|
-    |xxxx  |
+  Background:
+    Given that I am logged
 
-  @login-csv
-  Scenario: Login
-    Given que esteja na pagina de login
-    When inserir usuario e senha corretamente:
-    |user|password|
-    Then o login eh validado com sucesso
+  @buy-clothes-csv
+  Scenario: Buy clothes successfully
+    And choose the product to buy
+    And validate the product on the checkout page
+    And validate the adress
+    When choose the payment method
+    Then the purchase have to be successfully done
+    And the Order ID should appears at Order History
+

@@ -11,12 +11,12 @@ import io.cucumber.java.Scenario;
 
 
 public class Hooks {
-		
+
+
 
 	@Before()
 	public static void setup(Scenario scenario) {
-//		getDriver().get("http://automationpractice.com/index.php?");
-
+		getDriver().get("http://automationpractice.com/index.php?");
         ReadExcelData red = new ReadExcelData();
         System.out.println("Feature name: " + scenario.getName());
 	}
