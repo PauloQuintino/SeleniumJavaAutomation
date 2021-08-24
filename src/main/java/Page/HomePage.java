@@ -1,7 +1,7 @@
 package Page;
 
 import Helper.ValidationHelpers;
-import datafiles.ExcelApiTest;
+import datafiles.TestDataReader;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -50,7 +50,7 @@ public class HomePage extends BasePage {
 
     // ================== CLASSES =================== //
 
-    ExcelApiTest data = new ExcelApiTest();
+    TestDataReader data = new TestDataReader();
     ValidationHelpers helpers = new ValidationHelpers();
 
     // ================== METHODS =================== //
@@ -61,10 +61,10 @@ public class HomePage extends BasePage {
 
     public void addProductInCartAtHomePage() throws InterruptedException {
         scrollDown();
-        WebElement product = getDriver().findElement(By.xpath("(//a[@title='" + data.getDt("buy-clothes-csv", "product") + "']/../../div[@class='product-image-container'])[1]"));
+        WebElement product = getDriver().findElement(By.xpath("(//a[@title='" + data.getDt("product") + "']/../../div[@class='product-image-container'])[1]"));
         mouseOverOnElement(product);
         Thread.sleep(2000);
-        WebElement productClick = getDriver().findElement(By.xpath("(//h5/a[@title='" + data.getDt("buy-clothes-csv", "product") + "']/../../div[@class='button-container']/a[@title='Add to cart'])[1]"));
+        WebElement productClick = getDriver().findElement(By.xpath("(//h5/a[@title='" + data.getDt("product") + "']/../../div[@class='button-container']/a[@title='Add to cart'])[1]"));
         productClick.click();
         Thread.sleep(4000);
         Assert.assertEquals("Product successfully added to your shopping cart", successMessageAddToCart.getText().trim());

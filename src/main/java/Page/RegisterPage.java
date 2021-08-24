@@ -1,6 +1,6 @@
 package Page;
 
-import datafiles.ExcelApiTest;
+import datafiles.TestDataReader;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -37,7 +37,7 @@ public class RegisterPage extends BasePage {
 
     // ================== CLASSES =================== //
 
-    ExcelApiTest data = new ExcelApiTest();
+    TestDataReader data = new TestDataReader();
 
     public void acessAutomationPraticePage() {
         getDriver().get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
@@ -50,6 +50,12 @@ public class RegisterPage extends BasePage {
     public void login() {
         inputEmail.sendKeys(data.getDt("login-csv", "User"));
         inputSenha.sendKeys(data.getDt("login-csv", "Password").toString());
+        btnLogIn.click();
+    }
+
+    public void new_login() {
+        inputEmail.sendKeys(data.getDt("User"));
+        inputSenha.sendKeys(data.getDt("Password"));
         btnLogIn.click();
     }
 

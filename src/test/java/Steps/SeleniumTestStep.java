@@ -29,9 +29,14 @@ public class SeleniumTestStep {
         registerPage.validateSucessfullyLogin();
     }
 
+    @Given("I am in login page")
+    public void IAmInLoginPage(){
+        registerPage.acessLoginPage();
+    }
+
     @When("input user and password correctly")
     public void inputUserAndPasswordCorrectly() throws Exception {
-        registerPage.login();
+        registerPage.new_login();
     }
 
     @Then("the login is successful")

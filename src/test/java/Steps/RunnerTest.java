@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         plugin = {"pretty", "html:test-output", "json:target/cucumber.json"},
         features = {"src//test//resources//Feature"},
         glue = {"Steps", "Hooks"},
-        tags = {"@buy-clothes-csv"}
+        tags = {"@Web"}
 )
 
 public class RunnerTest {
