@@ -31,7 +31,7 @@ public class DriverFactory {
                     driver = new ChromeDriver(options);
             }
         }
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         return driver;
     }

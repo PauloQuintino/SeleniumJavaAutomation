@@ -4,6 +4,9 @@ import datafiles.TestDataReader;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import static Core.DriverFactory.getDriver;
 import static Core.DriverFactory.killDriver;
@@ -12,11 +15,15 @@ import static Core.DriverFactory.killDriver;
 public class Hooks {
 
     private static TestDataReader data = new TestDataReader();
+    public static Logger LOG = Logger.getLogger(Hooks.class);
 
     @Before()
     public static void setup(Scenario scenario) {
+        BasicConfigurator.configure();
+        PropertyConfigurator.configure("Log4j.properties");
+        LOG.info("SET UP AUTOMATION");
         getDriver().get("http://automationpractice.com/index.php?");
-        System.out.println("========================\nFeature name: " + scenario.getName() + "\n========================");
+        LOG.info("\n========================\nFeature name: " + scenario.getName() + "\n========================");
 
         Object[] arrayTags = scenario.getSourceTagNames().toArray();
         String ct = "";
@@ -26,7 +33,7 @@ public class Hooks {
             data.setCtKey(ct);
         }
 
-        System.out.println("========================\nCT: " + data.getCtKey() + "\n========================");
+        LOG.info("\n========================\nCT: " + data.getCtKey() + "\n========================");
     }
 
     @After
