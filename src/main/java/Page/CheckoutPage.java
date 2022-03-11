@@ -1,7 +1,7 @@
 package Page;
 
 import Helper.ValidationHelpers;
-import datafiles.ExcelApiTest;
+import datafiles.TestDataReader;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -78,7 +78,7 @@ public class CheckoutPage extends BasePage {
     // ================== CLASSES =================== //
 
     ValidationHelpers helpers = new ValidationHelpers();
-    ExcelApiTest data = new ExcelApiTest();
+    TestDataReader data = new TestDataReader();
 
     // ================== METHODS =================== //
 

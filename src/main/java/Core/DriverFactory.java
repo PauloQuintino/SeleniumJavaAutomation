@@ -12,15 +12,20 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class DriverFactory {
 
     private static WebDriver driver = null;
+    public static String chromedriverPath = "";
 
     public static WebDriver getDriver() {
+
+        if (System.getProperty("os.name").toLowerCase().contains("win")) {
+            chromedriverPath = "src/test/resources/drivers/chromedriver_windows.exe";
+        } else {
+            chromedriverPath = "src/test/resources/drivers/chromedriver_linux";
+        }
 
         if (driver == null) {
             switch (BrowserSettings.browser) {
                 case CHROME:
-                    System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-//                    WebDriverManager.chromedriver().setup();
-//                    driver = new ChromeDriver();
+                    System.setProperty("webdriver.chrome.driver", chromedriverPath);
                     driver = Serenity.getWebdriverManager().getWebdriver();
                     break;
 
@@ -28,10 +33,10 @@ public class DriverFactory {
                     ChromeOptions options = new ChromeOptions();
                     System.setProperty("webdriver.chrome.driver", "src/test/resources/Drivers/chromedriver.exe");
                     options.addArguments("--headless");
-                    driver = new ChromeDriver(options);
+                    break;
             }
         }
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         return driver;
     }

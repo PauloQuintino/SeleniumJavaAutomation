@@ -12,7 +12,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <version.surfire.plugin>2.22.0</version.surfire.plugin>
-        <failsafe.version>2.22.0</failsafe.version>
+        <failsafe.version>3.0.0-M5</failsafe.version>
         <serenity.version>2.2.9</serenity.version>
         <cucumber.version>5.7.0</cucumber.version>
         <serenity.cucumber.version>2.2.0</serenity.cucumber.version>
@@ -85,6 +85,32 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-csv</artifactId>
             <version>2.9.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.sikuli</groupId>
+            <artifactId>sikuli-api</artifactId>
+            <version>1.2.0</version>
         </dependency>
 
         <!--SERENITY BDD-->
@@ -163,26 +189,26 @@
             </plugin>
 
             <!-- Gerar um JAR "reduzido", deletando os recursos indesejados -->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-jar-plugin</artifactId>-->
-<!--                <version>3.1.0</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <phase>package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>jar</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <classifier>executor</classifier>-->
-<!--                            <excludes>-->
-<!--                                <exclude>**/Locators/*.*</exclude>-->
-<!--                                <exclude>**/Massa/*.*</exclude>-->
-<!--                            </excludes>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-jar-plugin</artifactId>-->
+            <!--                <version>3.1.0</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <phase>package</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>jar</goal>-->
+            <!--                        </goals>-->
+            <!--                        <configuration>-->
+            <!--                            <classifier>executor</classifier>-->
+            <!--                            <excludes>-->
+            <!--                                <exclude>**/Locators/*.*</exclude>-->
+            <!--                                <exclude>**/Massa/*.*</exclude>-->
+            <!--                            </excludes>-->
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
 
             <!-- Deletar o JAR normal, para evitar confusões -->
             <plugin>
@@ -218,8 +244,11 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${version.surfire.plugin}</version>
                 <configuration>
-                    <!--                        <includes>**/*RunnerTest.java</includes>-->
-                    <skip>true</skip>
+                    <includes>**/RunnerTest.java</includes>
+<!--                    <skip>true</skip>-->
+                    <skipTests>false</skipTests>
+                    <parallel>all</parallel>
+                    <threadCount>2</threadCount>
                 </configuration>
                 <dependencies>
                     <!-- Dependência necessária para que seja possível identificar os testes
@@ -250,39 +279,39 @@
                             <goal>integration-test</goal>
                             <goal>verify</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
+                   </execution>
+               </executions>
+           </plugin>
 
-            <plugin>
-                <groupId>net.serenity-bdd.maven.plugins</groupId>
-                <artifactId>serenity-maven-plugin</artifactId>
-                <version>2.2.0</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.serenity-bdd</groupId>
-                        <artifactId>serenity-core</artifactId>
-                        <version>${serenity.version}</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>serenity-reports</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>aggregate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+           <plugin>
+               <groupId>net.serenity-bdd.maven.plugins</groupId>
+               <artifactId>serenity-maven-plugin</artifactId>
+               <version>2.2.0</version>
+               <dependencies>
+                   <dependency>
+                       <groupId>net.serenity-bdd</groupId>
+                       <artifactId>serenity-core</artifactId>
+                       <version>${serenity.version}</version>
+                   </dependency>
+               </dependencies>
+               <executions>
+                   <execution>
+                       <id>serenity-reports</id>
+                       <phase>post-integration-test</phase>
+                       <goals>
+                           <goal>aggregate</goal>
+                       </goals>
+                   </execution>
+               </executions>
+           </plugin>
 
 
-        </plugins>
+       </plugins>
 
-    </build>
+   </build>
 
-    <reporting>
-        <outputDirectory>.\target\site</outputDirectory>
-    </reporting>
+   <reporting>
+       <outputDirectory>.\target\site</outputDirectory>
+   </reporting>
 
 </project>
