@@ -58,7 +58,6 @@ public class TestDataReader {
 
 
     public String getDt(String ct, String colName) {
-
         //map which holds data in Key (String) and values(Map- Column Name as Key and Value).
         Map<String, Map<String, String>> CSV;
 

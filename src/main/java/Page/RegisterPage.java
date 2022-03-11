@@ -68,6 +68,7 @@ public class RegisterPage extends BasePage {
     public void new_login() {
         LOG.info("Inserting login username");
         utils.highlightElement(inputEmail);
+        System.out.println(data.getDt("User"));
         inputEmail.sendKeys(data.getDt("User"));
         LOG.info("Inserting login password");
         utils.highlightElement(inputSenha);

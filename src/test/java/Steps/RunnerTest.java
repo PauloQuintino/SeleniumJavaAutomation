@@ -8,10 +8,10 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         snippets = CucumberOptions.SnippetType.CAMELCASE,
         monochrome = true,
-        plugin = {"pretty", "html:test-output", "json:target/cucumber.json"},
+        plugin = {"pretty", "html:test-output", "json:target/cucumber.json", "timeline:test-output-thread"},
         features = {"src//test//resources//Feature"},
         glue = {"Steps", "Hooks"},
-        tags = {"@login"}
+        tags = {"@Web"}
 )
 
 public class RunnerTest {
