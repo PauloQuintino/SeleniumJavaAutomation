@@ -72,6 +72,7 @@ public class Hooks extends BasePage {
 
     @After
     public static void quitDriver(Scenario scenario) throws DocumentException, IOException {
+        evidenceGenerator.setStatus(scenario.getStatus().toString());
         evidenceGenerator.takeScreenshot("TEAR DOWN");
         evidenceGenerator.saveEvidence();
         killDriver();

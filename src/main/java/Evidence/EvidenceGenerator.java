@@ -31,11 +31,21 @@ public class EvidenceGenerator extends BasePage {
     private Document document = null;
     private PdfReader reader = null;
     private TestDataReader data = new TestDataReader();
+    private String status;
     private static LinkedList<String> descriptions = new LinkedList<>();
     private static LinkedList<Image> images = new LinkedList<>();
 
     public EvidenceGenerator() {
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 
     public void takeScreenshot(String description) throws DocumentException, IOException {
         byte[] input = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
@@ -51,22 +61,26 @@ public class EvidenceGenerator extends BasePage {
     public void createHeader() {
         table = new PdfPTable(2);
 
+        //linha 1
         table.addCell("CT");
         table.addCell(data.getCtKey() + " - " + data.getCtName());
 
+        //linha 2
         table.addCell("Usuário");
         table.addCell(System.getProperty("user.name"));
 
+        //linha 3
         table.addCell("Sistema Operacional");
         table.addCell(System.getProperty("os.name"));
 
+        //linha 4
         table.addCell("Status");
-
         cell = new PdfPCell();
-
         Font f1 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 12);
-        f1.setColor(BaseColor.BLUE);
-        cell.addElement(new Phrase("TESTE", f1));
+        f1.setColor(BaseColor.GREEN);
+        Font f2 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 12);
+        f2.setColor(BaseColor.RED);
+        cell.addElement(new Phrase(getStatus(), getStatus().equals("PASSED") ? f1 : f2));
         table.addCell(cell);
 
         try {
