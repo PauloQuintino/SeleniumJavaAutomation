@@ -3,4 +3,5 @@ test-output/
 test-output-thread/
 .idea/
 
-#src/test/resources/Evidences/
+#src/test/resources/Evidences/*.pdf
+/*.pdf
