@@ -17,7 +17,7 @@ public class DriverFactory {
     public static WebDriver getDriver() {
 
         if (System.getProperty("os.name").toLowerCase().contains("win")) {
-            chromedriverPath = "src/test/resources/drivers/chromedriver_windows.exe";
+            chromedriverPath = "src/test/resources/drivers/chromedriver.exe";
         } else {
             chromedriverPath = "src/test/resources/drivers/chromedriver_linux";
         }
@@ -31,7 +31,7 @@ public class DriverFactory {
 
                 case HEADLESS:
                     ChromeOptions options = new ChromeOptions();
-                    System.setProperty("webdriver.chrome.driver", "src/test/resources/Drivers/chromedriver.exe");
+                    System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
                     options.addArguments("--headless");
                     break;
             }

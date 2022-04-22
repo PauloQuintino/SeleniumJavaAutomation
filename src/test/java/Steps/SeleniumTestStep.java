@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import Page.CheckoutPage;
 import Page.RegisterPage;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.DocumentException;
 import io.cucumber.java.en.And;
 
 
@@ -11,6 +13,8 @@ import Page.HomePage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import java.io.IOException;
 
 
 public class SeleniumTestStep {
@@ -23,14 +27,14 @@ public class SeleniumTestStep {
 
     // >>>>>>>>>>>>>>> login-csv <<<<<<<<<<<<<<<<
     @Given("that I am logged")
-    public void thatIAmLogged() {
+    public void thatIAmLogged() throws Exception {
         registerPage.acessLoginPage();
         registerPage.login();
         registerPage.validateSucessfullyLogin();
     }
 
     @Given("I am in login page")
-    public void IAmInLoginPage(){
+    public void IAmInLoginPage() throws DocumentException, IOException {
         registerPage.acessLoginPage();
     }
 
@@ -40,7 +44,7 @@ public class SeleniumTestStep {
     }
 
     @Then("the login is successful")
-    public void theLoginIsSuccessful() throws InterruptedException {
+    public void theLoginIsSuccessful() throws InterruptedException, DocumentException, IOException {
         registerPage.validateSucessfullyLogin();
     }
 

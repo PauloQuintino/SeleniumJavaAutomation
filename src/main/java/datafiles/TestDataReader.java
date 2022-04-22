@@ -17,10 +17,18 @@ public class TestDataReader {
     public FileInputStream fis = null;
     public XSSFWorkbook workbook = null;
     private static String ctKey;
+    private static String ctName;
 
     public TestDataReader() {
     }
 
+    public String getCtName() {
+        return ctName;
+    }
+
+    public void setCtName(String ctName) {
+        TestDataReader.ctName = ctName;
+    }
 
     public String getCtKey() {
         return ctKey;

@@ -1,13 +1,13 @@
 @Web
 Feature: Test Automation Java Selenium
 
-  @login
+  @CT-001
   Scenario: Login with different account
     Given I am in login page
     When input user and password correctly
     Then the login is successful
 
-  @buy-clothes-csv
+  @CT-002
   Scenario: Buy clothes successfully
     Given that I am logged
     And choose the product to buy
