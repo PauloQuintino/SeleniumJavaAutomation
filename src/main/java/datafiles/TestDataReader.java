@@ -42,48 +42,49 @@ public class TestDataReader {
     public static Map<String, Map<String, String>> getCSVData(char seperator, String FileName, int primaryKeyIndex)
             throws IOException {
 
-        //Create one object of Map type which hold another String (Key-Column as Key) and Map as as value.( for each row corresponding key and values).
+        //Cria um objeto do tipo Map que contém outra String (Key-Column como Key) e Map como value.(para cada linha, chave e valores correspondentes).
         Map<String, Map<String, String>> CSVData = new TreeMap<String, Map<String, String>>();
         Map<String, String> keyVals = null;
 
-        //Load CSV file in Reader class to parse CSV Data // arquivo CSV
+        //Carrega o arquivo CSV na classe Reader para analisar os dados CSV // arquivo CSV
         Reader reader = new FileReader("src/test/resources/DataFiles/TestData.csv");
 
-        //Identify CSV separator (comma delimitor, pipe separated etc.) Create Iterator to iterate each CSV row over column and row.
+        //Identifica o separador CSV (delimitador por vírgula, separado por barra vertical, etc.) Cria Iterator para iterar cada linha CSV baseado em coluna e linha.
         Iterator<Map<String, String>> iterator = new CsvMapper().readerFor(Map.class)
                 .with(CsvSchema.emptySchema().withHeader().withColumnSeparator(seperator).withoutQuoteChar())
                 .readValues(reader);
 
-        //Iterate iterator up to each row and put values in step 4 Map i.e CSVData.
+        //Itera o iterador a cada linha e coloca valores no Map, ou seja, CSVData.
         while (iterator.hasNext()) {
             keyVals = iterator.next();
             Object[] keys = keyVals.keySet().toArray();
             CSVData.put(keyVals.get(keys[primaryKeyIndex]), keyVals);
         }
-        //Return the CSVData Map as parse Data.
+
+        //Retorna os dados do Map.
         return CSVData;
     }
 
 
     public String getDt(String ct, String colName) {
-        //map which holds data in Key (String) and values(Map- Column Name as Key and Value).
+        //map que contém dados em Key (String) e valores(Map-Nome da Colunaq como Key e Value)
         Map<String, Map<String, String>> CSV;
 
         try {
 
-            //calling the getCSVData method passing the parse CSV Data
+            //chamando o método getCSVData passando o parse CSV Data
             CSV = getCSVData(';', "ParseCsv", 0);
 
-            //Iterate above collections over each Key
+            //Itera as coleções acima de cada chave
             Iterator<String> keys = CSV.keySet().iterator();
 
             while (keys.hasNext()) {
                 String primaryKey = keys.next();
 
-                //Get value using CT name and column Name
+                // Obtém o valor usando o nome do CT e o nome da coluna
                 if (primaryKey.equals(ct)) {
 
-                    //if value were found, then return column value
+                    //se o valor foi encontrado, então retorna o valor da coluna
                     return CSV.get(primaryKey).get(colName).toString();
                 }
             }
@@ -96,25 +97,25 @@ public class TestDataReader {
 
     public String getDt(String colName) {
 
-        //map which holds data in Key (String) and values(Map- Column Name as Key and Value).
+        //map que contém dados em Key (String) e valores(Map-Nome da Coluna como Key e Value)
         Map<String, Map<String, String>> CSV;
 
         try {
 
-            //calling the getCSVData method passing the parse CSV Data
+            //chamando o método getCSVData passando o parse CSVData para informar qual é o delimitador de dados no CSV
             CSV = getCSVData(';', "ParseCsv", 0);
 
-            //Iterate above collections over each Key
+            //Itera as coleções acima de cada chave
             Iterator<String> keys = CSV.keySet().iterator();
 
             while (keys.hasNext()) {
                 String primaryKey = keys.next();
 
 
-                //Get value using CT name and column Name
+                // Obtém o valor usando o nome do CT e o nome da coluna
                 if (primaryKey.equals(getCtKey())) {
 
-                    //if value were found, then return column value
+                    //se o valor foi encontrado, então retorna o valor da coluna
                     return CSV.get(primaryKey).get(colName).toString();
                 }
             }

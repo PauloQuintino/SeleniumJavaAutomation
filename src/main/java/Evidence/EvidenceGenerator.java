@@ -102,7 +102,11 @@ public class EvidenceGenerator extends BasePage {
         } catch (DocumentException e) {
             e.printStackTrace();
         }
+    }
 
+    public void resetImages(){
+        images.removeAll(images);
+        descriptions.removeAll(descriptions);
     }
 
     public String getTestDateTime(){
@@ -125,6 +129,7 @@ public class EvidenceGenerator extends BasePage {
                 document.setMargins(20, 20, 80, 20);
                 createHeader();
                 insertImages();
+                resetImages();
                 System.out.println("DOCUMENTO CRIADO....");
             }
         } catch (Exception e) {
