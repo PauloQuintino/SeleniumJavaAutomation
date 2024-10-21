@@ -6,7 +6,9 @@ public class BrowserSettings {
 	
 	public enum Browsers{
 		CHROME,
-		HEADLESS
+		HEADLESS,
+		OPERA,
+		EDGE
 	}
 
 }

@@ -47,9 +47,15 @@ public class EvidenceGenerator extends BasePage {
     }
 
 
-    public void takeScreenshot(String description) throws DocumentException, IOException {
+    public void takeScreenshot(String description){
         byte[] input = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
-        image = Image.getInstance(input);
+        try {
+            image = Image.getInstance(input);
+        } catch (BadElementException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         image.scaleToFit(PageSize.A4.getWidth(), PageSize.A4.getHeight());
         image.setAlignment(1);
 
