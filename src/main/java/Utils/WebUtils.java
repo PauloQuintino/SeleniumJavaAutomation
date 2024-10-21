@@ -7,7 +7,7 @@ import static Core.DriverFactory.getDriver;
 
 public class WebUtils {
 
-    public void highlightElement(WebElement element){
+    public static void highlightElement(WebElement element){
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("arguments[0].setAttribute('style', 'border: 3px solid blue');", element);
     }

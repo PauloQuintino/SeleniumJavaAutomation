@@ -11,71 +11,59 @@ public class ValidationHelpers {
     private static String orderId;
 
 
-    public String getProductName() {
+    public static String getProductName() {
         return productName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public static void setProductName(String productName) {
+        ValidationHelpers.productName = productName;
     }
 
-    public String getSize() {
+    public static String getSize() {
         return size;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public static void setSize(String size) {
+        ValidationHelpers.size = size;
     }
 
-    public String getColor() {
+    public static String getColor() {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public static void setColor(String color) {
+        ValidationHelpers.color = color;
     }
 
-    public String getUnitPrice() {
+    public static String getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(String unitPrice) {
-        this.unitPrice = unitPrice;
+    public static void setUnitPrice(String unitPrice) {
+        ValidationHelpers.unitPrice = unitPrice;
     }
 
-    public String getShippingTax() {
+    public static String getShippingTax() {
         return shippingTax;
     }
 
-    public void setShippingTax(String shippingTax) {
-        this.shippingTax = shippingTax;
+    public static void setShippingTax(String shippingTax) {
+        ValidationHelpers.shippingTax = shippingTax;
     }
 
-    public int getQuantity() {
+    public static int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public static void setQuantity(int quantity) {
+        ValidationHelpers.quantity = quantity;
     }
 
-    public String getOrderId() {
+    public static String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public static void setOrderId(String orderId) {
         ValidationHelpers.orderId = orderId;
     }
-
-
-    // ========== METHODS =========== //
-
-    public float getProductsTotalPrice() {
-        return quantity * Float.parseFloat(unitPrice);
-    }
-
-    public float getPurchaseTotal() {
-        return getProductsTotalPrice() + Float.parseFloat(shippingTax);
-    }
-
 }

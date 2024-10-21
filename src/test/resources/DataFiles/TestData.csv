@@ -1,4 +1,3 @@
-CT;User;Password;product;quantity;color;size;address;payment_method
-login-csv;automatomati@gmail.com;12345;;;;;;
-buy-clothes-csv;;;Faded Short Sleeve T-shirts;2;Blue;M;rua 1234t5 SUITE 421682;bankwire
-login;automatomati@gmail.com;12345;;;;;;
+CT;User;Password;product;quantity;color;size;address
+CT-001;teste_paul@test.com;@Test123;Radiant Tee;2;Blue;M;rua 1234t5 SUITE 421682
+CT-002;;;;;;;

@@ -1,43 +1,34 @@
 package Core;
 
-import java.util.concurrent.TimeUnit;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
-import net.serenitybdd.core.Serenity;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.time.Duration;
 
 public class DriverFactory {
-
     private static WebDriver driver = null;
-    public static String chromedriverPath = "";
 
     public static WebDriver getDriver() {
-
-        if (System.getProperty("os.name").toLowerCase().contains("win")) {
-            chromedriverPath = "src/test/resources/drivers/chromedriver_windows.exe";
-        } else {
-            chromedriverPath = "src/test/resources/drivers/chromedriver_linux";
-        }
 
         if (driver == null) {
             switch (BrowserSettings.browser) {
                 case CHROME:
-                    System.setProperty("webdriver.chrome.driver", chromedriverPath);
-                    driver = Serenity.getWebdriverManager().getWebdriver();
+                    driver = WebDriverManager.chromedriver().create();
                     break;
-
                 case HEADLESS:
                     ChromeOptions options = new ChromeOptions();
-                    System.setProperty("webdriver.chrome.driver", "src/test/resources/Drivers/chromedriver.exe");
                     options.addArguments("--headless");
+                    break;
+                case OPERA:
+                    driver = WebDriverManager.operadriver().create();
+                    break;
+                case EDGE:
+                    driver = WebDriverManager.edgedriver().create();
                     break;
             }
         }
-//        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.parseInt(Configuration.getInstance().getProperty("waitDuration"))));
         return driver;
     }
 
